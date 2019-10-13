@@ -12,7 +12,7 @@ else
 {echo "Привет! $name.";}
 echo '<P>Вы работаете с версией PHP : ' . phpversion();
 ?>
-<p></p><a href=F_POST.html>Возврат</a>
+<p></p><a href=task1_1.html>Возврат</a>
 
 </body>
 </html>
