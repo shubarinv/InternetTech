@@ -1,5 +1,6 @@
 <?php
 $inputSeconds=$_GET['sec'];
+if(is_numeric($inputSeconds)){
 $secondsInAMinute = 60;
 $secondsInAnHour  = 60 * $secondsInAMinute;
 $secondsInADay    = 24 * $secondsInAnHour;
@@ -17,7 +18,10 @@ $minutes = floor($minuteSeconds / $secondsInAMinute);
 
 // extract the remaining seconds
 $remainingSeconds = $minuteSeconds % $secondsInAMinute;
-$seconds = ceil($remainingSeconds);
+$seconds = ceil($remainingSeconds);}
+else{
+    $days="Ошибка, должно было быть введено число";
+}
 ?>
 <!doctype html>
 <html lang="ru">
