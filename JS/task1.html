@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2 id="1">ДОСТУП К СВОЙСТВАМ И МЕТОДАМ</h2>
+<p id="3">Коллекция all</p>
+<div id="2">Метод getElementById()</div>
+<script>
+    document.getElementById("1").onclick = function () {
+        if (document.getElementById("1").style.color === 'black') {
+            document.getElementById("1").style.color = 'white';
+            document.getElementById("1").style.backgroundColor = 'yellow';
+            document.getElementById("2").style.color = 'white';
+            document.getElementById("2").style.backgroundColor = 'yellow';
+
+        } else {
+            document.getElementById("1").style.color = 'black';
+            document.getElementById("1").style.backgroundColor = 'blue';
+            document.getElementById("2").style.color = 'black';
+            document.getElementById("2").style.backgroundColor = 'blue';
+        }
+    };
+    document.getElementById("3").onclick = function () {
+        for(i=0; i<document.all.length;i++)
+            if (document.all[i].style.color === 'red') {
+                document.all[i].style.color = 'red';
+                document.all[i].style.backgroundColor = 'white';
+            } else {
+                document.all[i].style.color = 'white';
+                document.all[i].style.backgroundColor = 'green';
+            }
+    }
+</script>
+</body>
+</html>
