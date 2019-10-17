@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="Lab7_2.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<h1 align="center">Учёт поступления товара</h1>
+<table align="center" border="1">
+    <tr>
+        <th>Наименование</th>
+        <th>Цена за единицу</th>
+        <th>Количество</th>
+        <th>Стоимость</th>
+    </tr>
+    <tr id="deskT">
+        <td>Стол письменный</td>
+        <td id="deskP"></td>
+        <td id="deskQ"></td>
+        <td id="deskRes"></td>
+    </tr>
+    <tr id="tableT">
+        <td>Стол кухонный</td>
+        <td id="tableP"></td>
+        <td id="tableQ"></td>
+        <td id="tableRes"></td>
+    </tr>
+    <tr id="chairT">
+        <td>Стул</td>
+        <td id="chairP"></td>
+        <td id="chairQ"></td>
+        <td id="chairRes"></td>
+    </tr>
+    <tr id="bookselfT">
+        <td>Шкаф книжный</td>
+        <td id="bookselfP"></td>
+        <td id="bookselfQ"></td>
+        <td id="bookselfRes"></td>
+    </tr>
+    <tr>
+        <td colspan="3">ИТОГО:</td>
+        <td id="sum"></td>
+    </tr>
+</table>
+
+<h3 align="center">Изменение цены и количества</h3>
+<div align="center">
+    <h4>Товар</h4>
+    <select id="furnChoose" name="">
+        <option value="desk">Стол письменный</option>
+        <option value="table">Стол кухонный</option>
+        <option value="chair">Стул</option>
+        <option value="bookself">Шкаф книжный</option>
+    </select>
+    <h4>Цена</h4>
+    <input id="price" min="1" type="number">
+    <h4>Количество</h4>
+    <input id="quantity" min="1" type="number">
+    <br><br>
+    <input onclick="tableChange()" type="submit" value="Enter">
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="Lab4_2.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<h1 align="center">Построение Эллипса</h1>
+<div style="display: inline;">
+    <div style="text-align: left;">
+        <h3>Задайте длины полуосей</h3>
+        <input id="a_len" placeholder="Горизонтальная" type="number"><br>
+        <input id="b_len" placeholder="Вертикальная" type="number"><br>
+        <input onclick="draw(document.getElementById('a_len').value, document.getElementById('b_len').value)"
+               type="submit" value="Построить">
+    </div>
+    <div align="center" id="drawPlace">
+
+    </div>
+</body>
+</html>
