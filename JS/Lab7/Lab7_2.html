@@ -54,9 +54,9 @@
         <option value="bookself">Шкаф книжный</option>
     </select>
     <h4>Цена</h4>
-    <input id="price" min="1" type="number">
+    <input type="text" id="price" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
     <h4>Количество</h4>
-    <input id="quantity" min="1" type="number">
+     <input type="text" id="quantity" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
     <br><br>
     <input onclick="tableChange()" type="submit" value="Enter">
 </div>
