@@ -16,13 +16,13 @@
     </select>
     <h3>Диапазон (Мин-0 Max-360)</h3>
     <form>
-        <input type="text" placeholder="Начальное значение" id="st_val" required
+        <input type="text" placeholder="Начальное значение" id="st_val" value="" required
                onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
-        <input type="text" placeholder="Конечное значение" id="end_val" required
+        <input type="text" placeholder="Конечное значение" id="end_val" required value=""
                onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                onchange="if(this.value>360){this.value='';this.placeholder='ДОЛЖНО БЫТЬ <= 360';this.setCustomValidity('Должно быть <=360 ')}">
         <h3>Шаг</h3>
-        <input type="text" placeholder="Начальное значение" id="step" required
+        <input type="text" placeholder="Начальное значение" id="step" required value=""
                onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"><br><br>
         <input onclick=check(); type="submit" value="Рассчитать" id="sbmBtn">
     </form>
