@@ -7,7 +7,7 @@ function check() {
     angleDeg_st = parseInt(document.getElementById('st_val').value);
     angleDeg_end = parseInt(document.getElementById('end_val').value);
     angleStep = parseInt(document.getElementById('step').value);
-    if (angleDeg_st < angleDeg_end||angleStep==='') {
+    if (angleDeg_st < angleDeg_end||angleStep!=='') {
         var i = angleDeg_st;
         var winObj = window.open("Lab7_1_2.html");
         winObj.document.write
