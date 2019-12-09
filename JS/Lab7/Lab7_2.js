@@ -7,7 +7,7 @@ function tableChange() {
     var x = document.getElementById('furnChoose').value;
     if (document.getElementById('price').value !== '' && document.getElementById('quantity').value !== '') {
         if (x == 'desk') {
-            var price_d = parseInt(document.getElementById('price').value);
+            var price_d = parseFloat(document.getElementById('price').value);
             document.getElementById('deskP').textContent = price_d;
 
             var quantity_d = parseInt(document.getElementById('quantity').value);
@@ -17,7 +17,7 @@ function tableChange() {
             document.getElementById('deskRes').textContent = sum_d;
 
         } else if (x == 'table') {
-            var price_t = parseInt(document.getElementById('price').value);
+            var price_t = parseFloat(document.getElementById('price').value);
             document.getElementById('tableP').textContent = price_t;
 
             var quantity_t = parseInt(document.getElementById('quantity').value);
@@ -27,7 +27,7 @@ function tableChange() {
             document.getElementById('tableRes').textContent = sum_t;
 
         } else if (x == 'chair') {
-            var price_c = parseInt(document.getElementById('price').value);
+            var price_c = parseFloat(document.getElementById('price').value);
             document.getElementById('chairP').textContent = price_c;
 
             var quantity_c = parseInt(document.getElementById('quantity').value);
@@ -37,7 +37,7 @@ function tableChange() {
             document.getElementById('chairRes').textContent = sum_c;
 
         } else if (x == 'bookself') {
-            var price_b = parseInt(document.getElementById('price').value);
+            var price_b = parseFloat(document.getElementById('price').value);
             document.getElementById('bookselfP').textContent = price_b;
 
             var quantity_b = parseInt(document.getElementById('quantity').value);
