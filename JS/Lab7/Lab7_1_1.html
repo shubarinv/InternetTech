@@ -14,12 +14,19 @@
         <option value="cos">Косинус</option>
         <option value="tan">Тангенс</option>
     </select>
-    <h3>Диапазон</h3>
-    <input id="st_val" max="360" min="0" placeholder="Начальное значение" style="width: 70px;" type="number">
-    <input id="end_val" max="360" min="0" placeholder="Конечное значение" style="width: 70px;" type="number">
-    <h3>Шаг</h3>
-    <input id="step" style="width: 70px;" type="number"><br><br>
-    <input onclick=check() type="submit" value="Рассчитать">
+    <h3>Диапазон (Мин-0 Max-360)</h3>
+    <form>
+        <input type="text" placeholder="Начальное значение" id="st_val" required
+               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
+        <input type="text" placeholder="Конечное значение" id="end_val" required
+               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+               onchange="if(this.value>360){this.value='';this.placeholder='ДОЛЖНО БЫТЬ <= 360';this.setCustomValidity('Должно быть <=360 ')}">
+        <h3>Шаг</h3>
+        <input type="text" placeholder="Начальное значение" id="step" required
+               onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"><br><br>
+        <input onclick=check(); type="submit" value="Рассчитать" id="sbmBtn">
+    </form>
+
 </div>
 
 </body>
