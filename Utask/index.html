@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <style>
+        body {
+            background-color: ivory;
+        }
+
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+    <script>
+        var direction = 1;
+        var percent = 0;
+        var selectedPattern = 4; // 1 - круг 2 - эллипс 3 - Квадрат 4 - прямоугольник
+        var pause = false;
+        $(function () {
+
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+
+            // set starting values
+            var fps = 70;
+            var percent = 0;
+
+
+            // start the animation
+            animate();
+
+            function animate() {
+                if (!pause) {
+                    // set the animation position (0-100)
+                    percent += direction;
+                    if (percent < 0) {
+                        percent = 100;
+                        //direction = 1;
+                    }
+                    if (percent > 100) {
+                        percent = 0;
+                        //direction = -1;
+                    }
+
+                    draw(percent);
+                }
+                // request another frame
+                setTimeout(function () {
+                    requestAnimationFrame(animate);
+                }, 1000 / fps);
+            }
+
+
+            // draw the current frame based on sliderValue
+            function draw(sliderValue) {
+
+                // redraw path
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.lineWidth = 5;
+
+                ctx.beginPath();
+                if (selectedPattern === 1) {
+                    ctx.moveTo(320, 0);
+                    ctx.quadraticCurveTo(640, 0, 640, 320);
+                }
+                if (selectedPattern === 2) {
+                    ctx.moveTo(320, 0);
+                    ctx.quadraticCurveTo(465, 0, 465, 320);
+                }
+                if (selectedPattern === 3) {
+                    ctx.moveTo(100, 100);
+                    ctx.lineTo(540,100);
+                }
+                if (selectedPattern === 4) {
+                    ctx.moveTo(50, 155);
+                    ctx.lineTo(590,155);
+                }
+                ctx.strokeStyle = 'red';
+                ctx.stroke();
+
+                ctx.beginPath();
+                if (selectedPattern === 1) {
+                    ctx.moveTo(640, 320);
+                    ctx.quadraticCurveTo(640, 640, 320, 640);
+                }
+                if (selectedPattern === 2) {
+                    ctx.moveTo(465, 320);
+                    ctx.quadraticCurveTo(465, 640, 320, 640);
+                }
+                if (selectedPattern === 3) {
+                    ctx.moveTo(540, 100);
+                    ctx.lineTo(540,540);
+                }
+                if (selectedPattern === 4) {
+                    ctx.moveTo(590, 155);
+                    ctx.lineTo(590,465);
+                }
+                ctx.strokeStyle = 'green';
+                ctx.stroke();
+
+                ctx.beginPath();
+                if (selectedPattern === 1) {
+                    ctx.moveTo(320, 640);
+                    ctx.quadraticCurveTo(0, 640, 0, 320);
+                }
+                if (selectedPattern === 2) {
+                    ctx.moveTo(320, 640);
+                    ctx.quadraticCurveTo(155, 640, 155, 320);
+                }
+                if (selectedPattern === 3) {
+                    ctx.moveTo(540, 540);
+                    ctx.lineTo(100,540);
+                }
+                if (selectedPattern === 4) {
+                    ctx.moveTo(590, 465);
+                    ctx.lineTo(50,465);
+                }
+                ctx.strokeStyle = 'blue';
+                ctx.stroke();
+
+                ctx.beginPath();
+                if (selectedPattern === 1) {
+                    ctx.moveTo(0, 320);
+                    ctx.quadraticCurveTo(0, 0, 320, 0);
+                }
+                if (selectedPattern === 2) {
+                    ctx.moveTo(155, 320);
+                    ctx.quadraticCurveTo(155, 0, 320, 0);
+                }
+                if (selectedPattern === 3) {
+                    ctx.moveTo(100, 540);
+                    ctx.lineTo(100,100);
+                }
+                if (selectedPattern === 4) {
+                    ctx.moveTo(50, 465);
+                    ctx.lineTo(50,155);
+                }
+                ctx.strokeStyle = 'gold';
+                ctx.stroke();
+
+                // draw the tracking rectangle
+                var xy;
+
+                if (sliderValue < 25) {
+                    var percent = sliderValue / 24;
+                    if (selectedPattern === 1) {
+                        xy = getQuadraticBezierXYatPercent({x: 320, y: 0}, {x: 640, y: 0}, {x: 640, y: 320}, percent);
+                    }
+                    if (selectedPattern === 2) {
+                        xy = getQuadraticBezierXYatPercent({x: 320, y: 0}, {x:465,y: 0}, {x: 465,y: 320}, percent);
+                    }
+                    if (selectedPattern === 3) {
+                        xy = getLineXYatPercent({x: 100, y: 100}, {x:540,y: 100}, percent);
+                    }
+                    if (selectedPattern === 4) {
+                        xy = getLineXYatPercent({x: 50, y: 155}, {x:590,y: 155}, percent);
+                    }
+                } else if (sliderValue < 50) {
+                    var percent = (sliderValue - 25) / 24;
+                    if (selectedPattern === 1) {
+                        xy = getQuadraticBezierXYatPercent({x: 640, y: 320}, {x: 640, y: 640}, {
+                            x: 320,
+                            y: 640
+                        }, percent);
+                    }
+                    if (selectedPattern === 2) {
+                        xy = getQuadraticBezierXYatPercent({x: 465, y: 320}, {x: 465, y: 640}, {x: 320, y: 640}, percent);
+                    }
+                    if (selectedPattern === 3) {
+                        xy = getLineXYatPercent({x: 540, y: 100}, {x:540,y: 540}, percent);
+                    }
+                    if (selectedPattern === 4) {
+                        xy = getLineXYatPercent({x: 590, y: 155}, {x:590,y: 465}, percent);
+                    }
+                } else if (sliderValue < 75) {
+                    var percent = (sliderValue - 50) / 24;
+                    if (selectedPattern === 1) {
+                        xy = getQuadraticBezierXYatPercent({x: 320, y: 640}, {x: 0, y: 640}, {x: 0, y: 320}, percent);
+                    }
+                    if (selectedPattern === 2) {
+                        xy = getQuadraticBezierXYatPercent({x: 320, y: 640}, {x: 155, y: 640}, {x: 155, y: 320}, percent);
+                    }
+                    if (selectedPattern === 3) {
+                        xy = getLineXYatPercent({x: 540, y: 540}, {x:100,y: 540}, percent);
+                    }
+                    if (selectedPattern === 4) {
+                        xy = getLineXYatPercent({x: 590, y: 465}, {x:50,y: 465}, percent);
+                    }
+                } else {
+                    var percent = (sliderValue - 75) / 25;
+                    if (selectedPattern === 1) {
+                        xy = getQuadraticBezierXYatPercent({x: 0, y: 320}, {x: 0, y: 0}, {x: 320, y: 0}, percent);
+                    }
+                    if (selectedPattern === 2) {
+                        xy = getQuadraticBezierXYatPercent({x: 155, y: 320}, {x: 155, y: 0}, {x: 320, y: 0}, percent);
+                    }
+                    if (selectedPattern === 3) {
+                        xy = getLineXYatPercent({x: 100, y: 540}, {x:100,y: 100}, percent);
+                    }
+                    if (selectedPattern === 4) {
+                        xy = getLineXYatPercent({x: 50, y: 465}, {x:50,y: 155}, percent);
+                    }
+                }
+                drawRect(xy, "red");
+
+            }
+
+
+            // draw tracking rect at xy
+            function drawRect(point, color) {
+                ctx.fillStyle = "cyan";
+                ctx.strokeStyle = "gray";
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.rect(point.x - 13, point.y - 8, 25, 15);
+                ctx.fill();
+                ctx.stroke();
+            }
+
+            // draw tracking dot at xy
+            function drawDot(point, color) {
+                ctx.fillStyle = color;
+                ctx.strokeStyle = "black";
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 8, 0, Math.PI * 2, false);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+            }
+
+            // line: percent is 0-1
+            function getLineXYatPercent(startPt, endPt, percent) {
+                var dx = endPt.x - startPt.x;
+                var dy = endPt.y - startPt.y;
+                var X = startPt.x + dx * percent;
+                var Y = startPt.y + dy * percent;
+                return ({x: X, y: Y});
+            }
+
+            // quadratic bezier: percent is 0-1
+            function getQuadraticBezierXYatPercent(startPt, controlPt, endPt, percent) {
+                var x = Math.pow(1 - percent, 2) * startPt.x + 2 * (1 - percent) * percent * controlPt.x + Math.pow(percent, 2) * endPt.x;
+                var y = Math.pow(1 - percent, 2) * startPt.y + 2 * (1 - percent) * percent * controlPt.y + Math.pow(percent, 2) * endPt.y;
+                return ({x: x, y: y});
+            }
+
+            // cubic bezier percent is 0-1
+            function getCubicBezierXYatPercent(startPt, controlPt1, controlPt2, endPt, percent) {
+                var x = CubicN(percent, startPt.x, controlPt1.x, controlPt2.x, endPt.x);
+                var y = CubicN(percent, startPt.y, controlPt1.y, controlPt2.y, endPt.y);
+                return ({x: x, y: y});
+            }
+
+            // cubic helper formula at percent distance
+            function CubicN(pct, a, b, c, d) {
+                var t2 = pct * pct;
+                var t3 = t2 * pct;
+                return a + (-a * 3 + pct * (3 * a - a * pct)) * pct
+                    + (3 * b + pct * (-6 * b + b * 3 * pct)) * pct
+                    + (c * 3 - c * 3 * pct) * t2
+                    + d * t3;
+            }
+
+
+        });   // end $(function(){});
+
+    </script>
+    <meta charset="UTF-8">
+    <title>_</title>
+</head>
+<body>
+<canvas id="canvas" width=640 height=640></canvas>
+<div>
+<button onclick="pause=false">Старт</button>
+<button onclick="pause=true">Стоп</button>
+    </div>
+<div style="margin-left: 250px">
+    <button onclick="direction=1">Почасовой</button>
+    <button onclick="direction=-1">Против часовой</button>
+</div>
+<div>
+    <button onclick="if(pause===true){selectedPattern=1;}">Круг</button>
+    <button onclick="if(pause===true){selectedPattern=2;}">Эллипс</button>
+    <button onclick="if(pause===true){selectedPattern=3;}">Квадрат</button>
+    <button onclick="if(pause===true){selectedPattern=4;}">Прямоугольник</button>
+</div>
+</body>
+</html>
