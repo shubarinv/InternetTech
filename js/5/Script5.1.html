@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>test</title>
+    <style>
+#block {position:absolute; left:500; top:300; width:50px; height:50px; background:#F00000;}
+    </style>
+	<BUTTON ID="B1" onclick="Start()"
+STYLE="position:absolute; left:800;top:5">
+Запустить</button>
+<div id="block"></div>
+    <script>
+flag=true
+function Start() {
+ if (flag){
+    var x0 = 300,
+        y0 = 300,
+        R = 200,
+        A = 0,
+        PI2 = Math.PI * 2;
+        dA = PI2 / 64;
+        block = document.getElementById('block');
+   Proc = window.setInterval(function() {
+        block.style.left = Math.round(x0 + R * Math.cos(A)) + 'px';
+        block.style.top = Math.round(y0 + R * Math.sin(A)) + 'px';
+        A += dA;
+        if (A >= PI2) A -= PI2;
+        else if (A < 0) A += PI2;
+    }, 40);
+	flag = false;
+	document.all.B1.innerHTML="Стоп";
+	} 
+	else {
+        window.clearInterval(Proc);
+		document.all.B1.innerHTML="Запустить"
+        flag = true;
+    }
+};
+</script>
+</head>
+<body>
+
+ 
+</body>
+</html>

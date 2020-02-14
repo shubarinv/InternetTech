@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta charset="windows-1251" />
+<title>LOOK AT TIHS DUUDE</title>
+</head> 
+<body>
+<h1>Мебель</h1>
+<form name="thing" onsubmit="return check (thing.prdt, thing.mtrl, thing.nmbr)" METHOD="POST" ACTION="form.php">
+   <select name="prdt">
+      <option value="empty">Изделие:</option>
+      <option value="Шкаф">Шкаф</option>
+      <option value="Стол">Стол</option>
+      <option value="Сервант">Сервант</option>
+      <option value="Стул">Стул</option>
+   </select>
+<p>
+   <select name="mtrl">
+      <option value="empty">Материал:</option>
+      <option value="Дуб">Дуб</option>
+      <option value="Орех">Орех</option>
+      <option value="Бук">Бук</option>
+   </select>
+</p>
+<p>
+   Кол-во мебели: <input name="nmbr" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"/>
+</p>
+<p>
+   <input type="submit" value="Заказать" onclick="pruf()"/>
+</p>
+
+</form>
+<script>
+function check (thing, mater, number)
+{
+if (thing.value == 'empty')  {alert ('Не выбран предмет');      thing.focus ();  return false}
+if (mater.value == 'empty') {alert ('Не выбран материал');      mater.focus (); return false}
+if (number.value == 'empty')      {alert ('Не выбрано количество');   number.select ();  return false}
+if (number.value <= 0 ) {alert ('Маловато');   number.select ();  return false}
+if (isinteger(number.value) == false) {alert ('Маловато');   number.select ();  return false}
+if (number.value.match(/^[-\+]?\d+/) === null )      {alert ('Не выбрано количество');   number.select ();  return false}
+Document.thing.action="PHP3.1.html";
+}
+</script>
+</body>
+</html>

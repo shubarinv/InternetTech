@@ -1,0 +1,35 @@
+<HTML ID='DOCUM'>
+<CENTER><H1 ID='zag'> Пример 1</h1>
+<h2 id="h2">ДОСТУП К СВОЙСТВАМ И МЕТОДАМ</h2>
+<p>Коллекция all</p>
+<div id="div">Метод getElementById()</div>
+<script>
+var a = document.getElementById('h2');
+var b = document.querySelectorAll('p')[0];
+var c = document.getElementById('div');
+a.addEventListener("click", function(){
+ this.style.color = (this.style.color == 'black') ? 'white' : 'black';
+ if(this.style.backgroundColor == '')
+ this.style.backgroundColor = 'yellow';
+ this.style.backgroundColor = (this.style.backgroundColor == 'yellow') ? 'blue' : 'yellow';
+}
+	)
+ 
+b.addEventListener("click", function(){
+this.style.color = (this.style.color == 'black') ? 'white' : 'black';
+ if(this.style.backgroundColor == '')
+ this.style.backgroundColor = 'yellow';
+ this.style.backgroundColor = (this.style.backgroundColor == 'yellow') ? 'blue' : 'yellow';
+}
+	)
+c.addEventListener("click", function(){
+if(this.style.color == '')
+ this.style.backgroundColor = 'white';
+this.style.color = (this.style.color == 'white') ? 'red' : 'white';
+ if(this.style.backgroundColor == '')
+ this.style.backgroundColor = 'green';
+ this.style.backgroundColor = (this.style.backgroundColor == 'green') ? 'white' : 'green';
+}
+	)
+</script>
+</HTML>

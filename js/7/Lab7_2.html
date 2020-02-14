@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="Lab7_2.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<h1 align="center">Учёт поступления товара</h1>
+<table align="center" border="1">
+    <tr>
+        <th>Наименование</th>
+        <th>Цена за единицу</th>
+        <th>Количество</th>
+        <th>Стоимость</th>
+    </tr>
+    <tr id="deskT">
+        <td>Стол письменный</td>
+        <td id="deskP"></td>
+        <td id="deskQ"></td>
+        <td id="deskRes"></td>
+    </tr>
+    <tr id="tableT">
+        <td>Стол кухонный</td>
+        <td id="tableP"></td>
+        <td id="tableQ"></td>
+        <td id="tableRes"></td>
+    </tr>
+    <tr id="chairT">
+        <td>Стул</td>
+        <td id="chairP"></td>
+        <td id="chairQ"></td>
+        <td id="chairRes"></td>
+    </tr>
+    <tr id="bookselfT">
+        <td>Шкаф книжный</td>
+        <td id="bookselfP"></td>
+        <td id="bookselfQ"></td>
+        <td id="bookselfRes"></td>
+    </tr>
+    <tr>
+        <td colspan="3">ИТОГО:</td>
+        <td id="sum"></td>
+    </tr>
+</table>
+<script language="Javascript">
+    <!--
+    function isNumberKey(evt)
+    {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        return !(charCode !== 46 && charCode > 31
+            && (charCode < 48 || charCode > 57));
+
+
+    }
+    //-->
+</script>
+<h3 align="center">Изменение цены и количества</h3>
+<div align="center">
+    <h4>Товар</h4>
+    <select id="furnChoose" name="">
+        <option value="desk">Стол письменный</option>
+        <option value="table">Стол кухонный</option>
+        <option value="chair">Стул</option>
+        <option value="bookself">Шкаф книжный</option>
+    </select>
+    <h4>Цена</h4>
+    <input type="text" id="price"
+           onkeypress="return isNumberKey(event)"
+           onchange="if(this.value<=0){this.value='';this.placeholder='ДОЛЖНО БЫТЬ > 0';this.setCustomValidity('Должно быть > 0 ')}">
+    <h4>Количество</h4>
+    <input type="text" id="quantity"
+           onkeypress="return (event.charCode === 8 || event.charCode === 0 || event.charCode === 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+           onchange="if(this.value<=0){this.value='';this.placeholder='ДОЛЖНО БЫТЬ > 0';this.setCustomValidity('Должно быть > 0 ')}">
+    <br><br>
+    <input onclick="tableChange()" type="submit" value="Enter">
+</div>
+</body>
+</html>

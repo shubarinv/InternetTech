@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>Document</title>
+</head>
+<body>
+<h1 align="center">ТРИГОНОМЕТРИЧЕСКИЕ ФУНКЦИИ</h1>
+<div align="center">
+    <h3>Функция</h3>
+    <select id="function">
+        <option value="sin">Синус</option>
+        <option value="cos">Косинус</option>
+        <option value="tan">Тангенс</option>
+    </select>
+    <h3>Диапазон (Мин-0 Max-90)</h3>
+    <form method="post" class="form">
+        <input type="text" value="" required
+               placeholder="Укажите начало расчета в градусах"
+               id="start" min="1" onchange="isNumber(this)">
+        <input type="text" placeholder="Конечное значение" required value=""
+               id="end" min="1" onchange="isNumber(this)">
+        <h3>Шаг</h3>
+        <input type="text" placeholder="Начальное значение" required value=""
+               id="step" min="1" onchange="isNumber(this)"><br><br>
+        <button type="submit">Рассчет</button>
+    </form>
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">В градусах</th>
+            <th scope="col">В радианах</th>
+            <th scope="col" class="function">function</th>
+        </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+</div>
+
+<script src="jquery-3.4.1.min.js"></script>
+<script>
+    $('.form').submit(function (event) {
+        event.preventDefault();
+        $('.info').hide();
+        $('.result').show();
+        var mathFunction = $('#function').val();
+        var start = $('#start').val();
+        if (start < 1 || start > 90) return alert("Начальное значение не может быть меньше 1 и больше 90!");
+        if (mathFunction === "tan" && start > 89.9) return alert("Tan 90!");
+        var end = $('#end').val();
+        if (end < 1 || end > 90) return alert("Конечное значение не может быть меньше 1 и больше 90!!");
+        if (mathFunction === "tan" && end > 89.9) return alert("Tan 90");
+        var step = $('#step').val();
+        //if (step < 0.1) return alert("Конечное значение не может быть меньше 0.1!");
+        $('.function').html(mathFunction);
+
+        $('#tableBody').empty();
+        var i = start;
+
+        while ((start < end) ? i <= end : i >= end) {
+            $('#tableBody').append('<tr><td>' + i + '</td><td>' + (i * (Math.PI / 180)).toFixed(3) + '</td><td>' + eval("Math." + mathFunction + "(" + (i * (Math.PI / 180)) + ")").toFixed(3) + '</td></tr>');
+
+            if (start < end) {
+                i = Number(i) + Number(step);
+            } else {
+                i = Number(i) - Number(step);
+            }
+        }
+    });
+
+    function isNumber(fld) {
+        var t = fld.value;
+        for (i = 0; i < t.length; i++) {
+            var ch = t.charAt(i);
+            if ((ch < "0" || ch > "9") && !(ch === "," || ch === ".")) {
+                alert("Не цифра");
+                fld.focus();
+                fld.select();
+                return false;
+            }
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

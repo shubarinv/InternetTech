@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Фотографии</title>
+  </head>
+  <body>
+    <h3 align="center">MEMES? MEMES!
+	  <select onchange="prosmotres(this)">
+	    <option value="Something">Think about it</option>
+	    <option value="S1">MONEY</option>
+	    <option value="wolf">Cute Wolf</option>
+	    <option value="yay">PEPE (YAY)</option>
+	  </select>
+	  <br><br>
+	  <img id="img" src="_99372497_whatsubject.jpg" width='850px' height='550px'>
+	</h3>
+  </body>
+  <script>
+    var photo = new Array();
+	photo["Something"] = new Image(720, 480);
+	photo["Something"].src = "_99372497_whatsubject.jpg";
+	photo["S1"] = new Image(720, 480);
+	photo["S1"].src = "a473cda6c0a58d9b2e2bc2292d16c3341370423843-1301771802-4d97761a-620x348.jpg";
+	photo["wolf"] = new Image(720, 480);
+	photo["wolf"].src = "Floof_800x800_SEPS-1-1000x1000.jpg";
+	photo["yay"] = new Image(720, 480);
+	photo["yay"].src = "tenor.gif";
+    function prosmotres(list) 
+	{
+		item = list.options[list.selectedIndex].value;
+		document.all.img.src = photo[item].src;
+	}
+  </script>
+</html>

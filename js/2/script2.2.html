@@ -1,0 +1,52 @@
+<HTML> 
+<HEAD> 
+<TITLE>Reaction</TITLE> 
+<meta charset="windows-1251"> 
+<SCRIPT language="JavaScript" src="second.js"></script> 
+</HEAD> 
+<BODY ID='B' onclick='rodEl()'> 
+<p align=center><IMG src='another.jpg' id='img' height='500' width='500'></p>
+<H1 align=center ID='HH' style='color:red'>Sample Text</H1>
+<H2 align=center ID='HH1' style='color:green'>Bottom text</H2>
+<script>
+flag=true;
+function rodEl() 
+{ 
+  var e=window.event; 
+  id1=e.srcElement.id;
+  switch(id1) 
+  { 
+	case 'img':
+	if(flag) 
+	{
+		document.getElementById(id1).src='sampletext.jpg';
+		document.getElementById('HH').innerHTML='Another Text';
+		document.getElementById('HH1').innerHTML='Another Bottom text';
+		flag=false;
+	}
+	else 
+	{
+		document.getElementById(id1).src='another.jpg';
+		document.getElementById('HH').innerHTML='Sample Text';
+		document.getElementById('HH1').innerHTML='Bottom text';
+		flag=true;
+	}
+	break;
+    case 'HH':
+	z=document.getElementById(id1).style.color;
+	if(z=='red') z='blue';
+	else z='red';
+	document.getElementById(id1).style.color=z;
+	break;
+	 case 'HH1':
+	z=document.getElementById(id1).style.color;
+	if(z=='green') z='purple';
+	else z='green';
+	document.getElementById(id1).style.color=z;
+	break;
+	
+  } 
+} 
+</script>
+</BODY> 
+</HTML>

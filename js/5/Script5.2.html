@@ -1,0 +1,62 @@
+<html>
+<head><title>Перетаскивание</title></head>
+<div id="grey"
+style="position:absolute;
+left:10;top:100;width:500;height:500;background-color:#C8C0C0">
+</div>
+<body  onload="init(event)">
+<h2 align="center" style="color:#ff00ff">Перетаскивание квадрата мышкой</h2>
+<h3 align="center">Установите курсор внутри красногоквадрата, нажмите левую кнопку
+мышки и тащите квадрат.<BR> 
+ Для освобождения квадрата
+от захвата отпустите кнопку мышки</h3>
+<P align=right>
+Примечание. Страница правильно
+отображается в браузерах <i>Mozilla Firefox 2.0</i> � <i>Internet Explorer 6.0 </i>
+</p>
+<DIV id='kv'  style="position:absolute;left:20;top:110;width:50;height:50;background-color:red">
+<div>
+</body>
+<SCRIPT>
+flag=false;
+
+function init()
+{
+		document.all.kv.onmousemove=dragIt 
+		 
+		document.all.kv.onmouseup=osvobodi     
+		document.all.kv.onmousedown=zachvat
+}
+function dragIt(evt)
+{
+	sobytie = (evt) ? evt : (window.event) ? window.event : "";
+if(flag)
+{	document.all.kv.style.top=sobytie.clientY-25;
+if(parseInt(document.all.kv.style.top)<parseInt(document.all.grey.style.top)){
+	document.all.kv.style.top=document.all.grey.style.top;
+	}
+	var a=parseInt(document.all.kv.style.top)+parseInt(document.all.kv.style.height);
+	var b=parseInt(document.all.grey.style.top)+parseInt(document.all.grey.style.height);
+       if(a>b){
+	document.all.kv.style.top=b-parseInt(document.all.kv.style.height);
+	}
+   	document.all.kv.style.left=sobytie.clientX-25;
+	if(parseInt(document.all.kv.style.left)<parseInt(document.all.grey.style.left)){
+	document.all.kv.style.left=document.all.grey.style.left;
+	}
+var c=parseInt(document.all.kv.style.left)+parseInt(document.all.kv.style.width);
+var d=parseInt(document.all.grey.style.left)+parseInt(document.all.grey.style.width);
+  if(c>d){
+document.all.kv.style.left=d-parseInt(document.all.kv.style.width);
+}
+	
+    }
+}  
+function osvobodi()
+{flag=false;
+}
+function zachvat()
+{flag=true;
+}
+</SCRIPT>
+</html>

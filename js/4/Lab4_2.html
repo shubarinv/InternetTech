@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="Lab4_2.js"></script>
+    <title>Document</title>
+    <style>
+        .first_ellips {
+            width: 500px;
+            height: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ellips1 {
+            margin: auto;
+            display: block;
+            border: 1px solid #000000;
+            background-color: #006eff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .line1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 2px;
+            height: 500px;
+            background-color: #000000;
+        }
+
+        .line2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 2px;
+            width: 500px;
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body>
+<h1 align="center">Овальчики</h1>
+<form method="post" class="form">
+    <div class="form-group">
+        <label class="col-form-label">Горизонталь a=</label>
+        <input type="number" class="form-control a" placeholder="a" name="a" value="90" min="0">
+    </div>
+    <div class="form-group">
+        <label class="col-form-label">Вертикаль b=</label>
+        <input type="number" class="form-control b" placeholder="b" name="b" value="180" min="0">
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">DO IT</button>
+</form>
+<h1 align="center">Через DIV</h1>
+<center>
+    <div class="first_ellips">
+        <div class="ellips1">
+            <div class="line1"></div>
+            <div class="line2"></div>
+        </div>
+    </div>
+</center>
+</div>
+<h1 align="center">Через SVG</h1>
+<div id="second">
+    <center>
+        <div class="second_ellips"></div>
+    </center>
+</div>
+<h1 align="center">Через canvas HTML5</h1>
+<div id="third">
+    <center>
+        <canvas id="canvas" width="500" height="500"></canvas>
+    </center>
+
+    <script src="jquery-3.4.1.min.js"></script>
+</div>
+<script>
+    $('.form').submit(function (event) {
+        var A = $('.a').val();
+        var B = $('.b').val();
+		if (A > 240) return alert("Слишком большой Эллипс");
+		if (B > 240) return alert("Слишком большой Эллипс");
+        event.preventDefault();
+        $('.info').hide();
+        $('.result').show();
+        draw_first_ellipse(A, B);
+        draw_second_ellipse(A, B);
+        draw_third_ellipse(A, B);
+    });
+
+    function draw_first_ellipse(A, B) {
+        var radius = (A / B === 1) ? 100 : 100 - (A / B * 100);
+        $('.ellips1').css("height", B * 2).css("width", A * 2).css("border-radius", radius + "%");
+    }
+
+    function draw_second_ellipse(A, B) {
+        $('.second_ellips').html('<svg height="500" width="500">' +
+            '<ellipse cx="250" cy="250" rx="' + A + '" ry="' + B + '" style="fill:#9500ff;stroke:#000000;stroke-width:1" />' +
+            '<line x1="250" y1="0" x2="250" y2="500" style="stroke:black;stroke-width:2" />' +
+            '<line x1="0" y1="250" x2="500" y2="250" style="stroke:black;stroke-width:2" />' +
+            '</svg>');
+    }
+
+    var canvas = document.getElementById("canvas");
+    var ctx = context = canvas.getContext("2d");
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+
+    function draw_third_ellipse(A, B) {
+        canvas.width = canvas.width;
+        ctx.save();
+
+        ctx.beginPath();
+
+        ctx.translate(centerX, centerY);
+        ctx.scale(A / B, 1);
+        ctx.fillStyle = "#ccff00";
+        ctx.arc(0, 0, B, 0, Math.PI * 2, true);
+        context.fill();
+
+        ctx.restore();
+        ctx.closePath();
+
+        ctx.fillStyle = "#000000";
+        ctx.fillRect(centerX - 1, 0, 2, 500);
+        ctx.fillRect(0, centerY - 1, 500, 2);
+        ctx.stroke();
+    }
+</script>
+</body>
+</html>

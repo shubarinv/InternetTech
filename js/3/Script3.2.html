@@ -1,0 +1,54 @@
+<html>
+  <head>
+  <meta charset="windows-1251">
+    <title>Angle</title>
+	  <script>
+	  		function roundPlus(x, n) { 
+  if(isNaN(x) || isNaN(n)) return false;
+  var m = Math.pow(10,n);
+  return Math.round(x*m)/m;
+}
+	  function Check() 
+	  {
+	if  (document.all.func.value == "tan" && document.all.grad.value == 90)
+	{alert ("tan 90 не существует");
+	return false;
+	}
+		if (isNaN(document.all.grad.value) || document.all.grad.value > 90 || document.all.grad.value < 0) 
+		{
+			alert("“гол задан неверно");
+			return false;
+		}
+	  }
+	  function Calculate() 
+	  {
+		radian = document.all.grad.value * 3.14 / 180;
+		func = document.all.func.value;
+		var ol = eval("Math." + func + "(" + radian + ")");
+		col =roundPlus(ol,2);
+		str = func + "(" + document.all.grad.value + ") = " + col; 
+		
+		document.all.inner.innerHTML = str;
+		
+
+
+	  }
+  </script>
+  </head>
+  <body>
+    <h3>вывод ѓрадусов</h3>
+	<p>Угол должен быть больше нолика и меньше 90 градусов
+	<p>Угол <input type="text" name="grad" onchange="Check()">
+    <p>Функция...........
+	
+	  <select name="func">
+	    <option value="sin">sin</option>
+	    <option value="cos">cos</option>
+	    <option value="tan">tan</option>
+	  </select>
+	  <p>
+	<input type="submit" value="Вычислить" onclick="Check(); Calculate()">
+	<p><p>
+	<b id="inner"></b>
+  </body>
+</html>

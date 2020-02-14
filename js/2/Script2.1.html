@@ -1,0 +1,53 @@
+<HTML>
+<TITLE>МЫШКИ</title>
+<BODY>
+<H2 align=center style="color:green">Пять событий с мышкой</h2>
+<P align=center ID='gamma' 
+onclick="M_Over2()">
+Щёлкните по мне мышкой</p>
+<SCRIPT>
+flag=true
+function M_Over2(){
+if(flag){
+	document.all.gamma.style.fontSize='48px';
+	document.all.gamma.style.color='white';
+  document.all.gamma.style.backgroundColor='cyan';
+  flag=false;
+}
+else
+{ 
+	document.all.gamma.style.fontSize='16px';
+	document.all.gamma.style.color='black';
+  document.all.gamma.style.backgroundColor='white';
+  flag=true;
+}
+}
+</script>
+<P align=center ID='beta' onMouseDown="M_Over1()"
+OnMouseUp="M_Out1()">
+На этом тексте нажмите, подержите и отпустите левую кнопку мышки</p>
+<SCRIPT>
+function M_Over1()
+{
+  document.all.beta.style.backgroundColor='green'
+}
+function M_Out1()
+{ 
+  document.all.beta.style.backgroundColor='yellow'
+}
+</script>
+<P align=center ID='alfa' onMouseOver="M_Over()"
+onMouseOut="M_Out()">
+Медленно проведите курсором мышки по этой надписи</p>
+<SCRIPT>
+function M_Over()
+{
+  document.all.alfa.style.backgroundColor='red'
+}
+function M_Out()
+{ 
+  document.all.alfa.style.backgroundColor='blue'
+}
+</script>
+</body>
+</html>
