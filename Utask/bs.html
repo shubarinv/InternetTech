@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+    <meta charset="UTF-8">
+    <title>_</title>
+    <script>function isNumberKey(evt)
+    {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        return !(charCode !== 46 && charCode > 31
+            && (charCode < 48 || charCode > 57));
+
+
+    }</script>
+</head>
+<body>
+
+<canvas id="canvas" width=1800px height="800"></canvas>
+<div style="width:100%;height: 100px;">
+    <label>X
+        <input type="radio" id="coordType" name="rd" value="X"  checked="checked">
+    </label>
+    <label>Y
+        <input type="radio" id="coordType1" name="rd" value="Y">
+    </label><br>
+    <label>Статич коорд
+        <input type="text" onchange="isNumberKey(this)" onkeypress="return (event.charCode === 8 || event.charCode === 0 || event.charCode === 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+               onchange="if(this.value<=0){this.value='';this.placeholder='ДОЛЖНО БЫТЬ > 0';this.setCustomValidity('Должно быть > 0 ')}" id="staticCoord">
+    </label>
+    <label>Мин динам коорд
+        <input type="text" onchange="isNumberKey(this)" onkeypress="return (event.charCode === 8 || event.charCode === 0 || event.charCode === 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+               onchange="if(this.value<=0){this.value='';this.placeholder='ДОЛЖНО БЫТЬ > 0';this.setCustomValidity('Должно быть > 0 ')}" id="min">
+    </label>
+    <label>
+        Макс динам коорд
+        <input type="text" onchange="isNumberKey(this)" onkeypress="return (event.charCode === 8 || event.charCode === 0 || event.charCode === 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+               onchange="if(this.value<=0){this.value='';this.placeholder='ДОЛЖНО БЫТЬ > 0';this.setCustomValidity('Должно быть > 0 ')}" id="max">
+    </label>
+    <label>
+        Шаг
+        <input type="text" onchange="isNumberKey(this)" onkeypress="return (event.charCode === 8 || event.charCode === 0 || event.charCode === 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+               onchange="if(this.value<=0){this.value='';this.placeholder='ДОЛЖНО БЫТЬ > 0';this.setCustomValidity('Должно быть > 0 ')}" id="step">
+    </label>
+    <input type="button" onclick="drawElps()" value="draw">
+</div>
+<script>
+    var min = 0;
+    var max = 0;
+    var CoordX=0;
+    var CoordY=0;
+    var step = 0;
+    var staticCoord = 0;
+    var SelectedStaticCoord = "x";
+    var canvas = document.getElementById('canvas');
+
+    var ctx = canvas.getContext('2d');
+    function drawEllipseByCenter(ctx, cx, cy, w, h) {
+        drawEllipse(ctx, cx - w / 2.0, cy - h / 2.0, w, h);
+    }
+
+    function drawElps() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if(document.getElementById("coordType").checked){SelectedStaticCoord="x"}
+        else{SelectedStaticCoord="y"}
+        min= parseInt(document.getElementById("min").value);
+        max=parseInt(document.getElementById("max").value);
+        step=parseInt(document.getElementById("step").value);
+        staticCoord=parseInt(document.getElementById("staticCoord").value);
+
+        for (let i = min; i < max; i+=step) {
+            console.log("Inter: "+i);
+            if(SelectedStaticCoord==="x"){
+                console.log("X elps drw");
+                drawEllipse(ctx,CoordX,CoordY,staticCoord,i);
+            }
+            if(SelectedStaticCoord==="y"){
+                console.log("Y elps drw");
+                drawEllipse(ctx,CoordX,CoordY,i,staticCoord);
+
+            }
+            CoordX+=120;
+            if(CoordX>=1440){
+                CoordX=0;
+                CoordY+=120;
+            }
+        }
+        CoordX=0;
+        CoordY=0;
+        console.log("DONE");
+    }
+
+    function drawEllipse(ctx, x, y, w, h) {
+        var kappa = .5522848,
+            ox = (w / 2) * kappa, // control point offset horizontal
+            oy = (h / 2) * kappa, // control point offset vertical
+            xe = x + w,           // x-end
+            ye = y + h,           // y-end
+            xm = x + w / 2,       // x-middle
+            ym = y + h / 2;       // y-middle
+
+        ctx.beginPath();
+        ctx.moveTo(x, ym);
+        ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+        ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+        ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+        ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+        //ctx.closePath(); // not used correctly, see comments (use to close off open path)
+        ctx.stroke();
+    }
+
+
+</script>
+</body>
+
+
+</html>
